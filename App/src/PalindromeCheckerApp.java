@@ -1,30 +1,36 @@
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 
-public class FIFOvsLIFO {
+public class DequePalindrome {
     public static void main(String[] args) {
 
-        String str = "ABC";   // Hardcoded string
+        String str = "level";   // Hardcoded string
 
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> deque = new LinkedList<>();
 
-        // Enqueue into Queue & Push into Stack
+        // Insert characters into deque
         for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            queue.add(ch);   // FIFO
-            stack.push(ch);  // LIFO
+            deque.addLast(str.charAt(i));
         }
 
-        System.out.println("Dequeue (FIFO order):");
-        while (!queue.isEmpty()) {
-            System.out.print(queue.remove() + " ");
+        boolean isPalindrome = true;
+
+        // Compare front and rear until empty or one element left
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        System.out.println("\nPop (LIFO order):");
-        while (!stack.isEmpty()) {
-            System.out.print(stack.pop() + " ");
+        // Print result
+        if (isPalindrome) {
+            System.out.println(str + " is a palindrome.");
+        } else {
+            System.out.println(str + " is not a palindrome.");
         }
     }
 }
